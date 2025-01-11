@@ -15,32 +15,7 @@ services:
         value: 3.12.0
       - key: WEB_CONCURRENCY
         value: 4
-      - key: DJANGO_SECRET_KEY
-        generateValue: true
-      - key: CELERY_BROKER_URL
-        sync: false
-      - key: CELERY_RESULT_BACKEND
-        sync: false
-      - key: EMAIL_HOST
-        sync: false
-      - key: EMAIL_PORT
-        sync: false
-      - key: EMAIL_HOST_USER
-        sync: false
-      - key: EMAIL_HOST_PASSWORD
-        sync: false
-      - key: EMAIL_USE_TLS
-        sync: false
-      - key: DB_HOST
-        value: your-mysql-host.aivencloud.com
-      - key: DB_PORT
-        value: your-port
-      - key: DB_NAME
-        value: your-db-name
-      - key: DB_USER
-        value: your-username
-      - key: DB_PASSWORD
-        sync: false
+
   
   - type: redis
     name: inventory-redis
@@ -56,8 +31,6 @@ services:
     buildCommand: docker build -t inventory-system .
     startCommand: celery -A inventory_system worker --loglevel=info --concurrency 4
     envVars:
-      - key: DJANGO_SETTINGS_MODULE
-        value: inventory_system.settings
       - key: CELERY_BROKER_URL
         fromService:
           type: redis
