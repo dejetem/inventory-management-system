@@ -20,6 +20,7 @@ services:
     container_name: app
     volumes:
       - .:/app
+      - ./.env:/path/to/.env
     ports:
       - "8000:8000"
     depends_on:
