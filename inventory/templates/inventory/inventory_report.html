@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inventory Report</title>
+</head>
+<body>
+    <h1>Inventory Report</h1>
+    <h2>Low Stock Items</h2>
+    <ul>
+        {% for item in low_stock %}
+            <li>{{ item.name }} - {{ item.quantity }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Supplier Performance</h2>
+    <ul>
+        {% for supplier in supplier_performance %}
+            <li>{{ supplier.name }} - {{ supplier.total_products }} products</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

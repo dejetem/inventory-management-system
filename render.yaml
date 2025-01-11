@@ -1,0 +1,34 @@
+services:
+  - type: web
+    name: inventory-system
+    # region: oregon
+    env: docker
+    buildCommand: docker build -t inventory-system .
+    startCommand: gunicorn inventory_system.wsgi:application --bind 0.0.0.0:$PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: WEB_CONCURRENCY
+        value: 4
+  
+  - type: redis
+    name: inventory-redis
+    # region: oregon
+    ipAllowList: []  # Allow all IPs, for security reasons only allow internal connections
+    plan: free
+    maxmemoryPolicy: noeviction # recommended policy for queues
+
+  - type: worker
+    name: celery-worker
+    env: docker
+    # region: oregon
+    buildCommand: docker build -t inventory-system .
+    startCommand: celery -A inventory_system worker --loglevel=info --concurrency 4
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: inventory_system.settings
+      - key: CELERY_BROKER_URL
+        fromService:
+          type: redis
+          name: inventory-redis
+          property: connectionString
