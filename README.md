@@ -178,7 +178,7 @@ Coverage reports are generated in both terminal and HTML formats.
 5.1. API Documentation
 DRF’s built-in browsable API is used for documentation.
 
-Endpoints are documented using Django’s include_docs_urls.
+Endpoints are documented using drf_yasg.
 
 
 6. Conclusion
