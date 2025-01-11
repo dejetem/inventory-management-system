@@ -18,7 +18,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv()
 
 
-print("os.environ.get('CELERY_BROKER_URL')", os.environ.get('CELERY_BROKER_URL'))
+print("os.environ.get('CELERY_BROKER_URL')", os.getenv('CELERY_BROKER_URL'))
 print("os.environ.get('DJANGO_SECRET_KEY')", os.environ.get('DJANGO_SECRET_KEY'))
 print("os.environ.get('DB_NAME')", os.environ.get('DB_NAME'))
 
