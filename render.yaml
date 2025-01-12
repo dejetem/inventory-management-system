@@ -3,7 +3,7 @@ services:
     name: inventory-system
     region: oregon
     env: docker
-    buildCommand: docker build -t inventory-system .
+    buildCommand: docker build --build-arg DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY -t inventory-system .
     startCommand: gunicorn inventory_system.wsgi:application --bind 0.0.0.0:$PORT
     envVars:
       - key: DJANGO_SECRET_KEY
@@ -17,5 +17,5 @@ services:
     name: celery-worker
     env: docker
     region: oregon
-    buildCommand: docker build -t inventory-system .
+    buildCommand: docker build --build-arg DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY -t inventory-system .
     startCommand: celery -A inventory_system worker --loglevel=info --concurrency 4
