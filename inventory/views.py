@@ -12,6 +12,7 @@ from .serializers import ProductSerializer, SupplierSerializer, InventorySeriali
 from .tasks import process_csv, generate_inventory_report
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
+from rest_framework.parsers import MultiPartParser, FormParser
 
 
 
@@ -146,7 +147,38 @@ class InventoryViewSet(viewsets.ModelViewSet):
 
 class CSVUploadView(APIView):
     permission_classes = [permissions.IsAuthenticated]
+    parser_classes = [MultiPartParser, FormParser]  # Add this line
 
+    @swagger_auto_schema(
+        operation_description="Upload a CSV file for processing.",
+        manual_parameters=[
+            openapi.Parameter(
+                name='file',
+                in_=openapi.IN_FORM,
+                type=openapi.TYPE_FILE,
+                required=True,
+                description="CSV file to upload."
+            ),
+        ],
+        responses={
+            202: openapi.Response(
+                description="CSV upload is being processed. You will receive an email with the results.",
+                examples={
+                    "application/json": {
+                        "message": "CSV upload is being processed. You will receive an email with the results."
+                    }
+                }
+            ),
+            400: openapi.Response(
+                description="Bad Request",
+                examples={
+                    "application/json": {
+                        "error": "No file uploaded"
+                    }
+                }
+            ),
+        }
+    )
     def post(self, request):
         file = request.FILES.get('file')
         if not file:
@@ -175,6 +207,7 @@ class CSVUploadView(APIView):
             {"message": "CSV upload is being processed. You will receive an email with the results."},
             status=status.HTTP_202_ACCEPTED
         )
+
     
 
 class GenerateReportView(APIView):
