@@ -2,10 +2,10 @@ FROM python:3.12-slim
 ENV PYTHONUNBUFFERED 1
 ENV PORT 8000
 # Declare the build argument
-ARG DJANGO_SECRET_KEY
+# ARG DJANGO_SECRET_KEY
 
 # Optionally, set it as an environment variable during build
-ENV DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+# ENV DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
 
 # Debug: Print environment variables
 RUN echo "Environment Variables:" && env
