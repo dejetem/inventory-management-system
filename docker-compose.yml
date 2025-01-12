@@ -21,6 +21,7 @@ services:
     volumes:
       - .:/app
       - ./.env:/path/to/.env
+      - ./secrets:/etc/secrets 
     ports:
       - "8000:8000"
     depends_on:
@@ -42,6 +43,7 @@ services:
     entrypoint: ["/celery-entrypoint.sh"]
     volumes:
       - .:/app
+      - ./secrets:/etc/secrets
     depends_on:
       backend:
         condition: service_started

@@ -17,6 +17,7 @@ RUN echo "Secret Key is: ${DJANGO_SECRET_KEY}"
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
+    supervisor \
     zbar-tools \
     libzbar-dev \
     default-libmysqlclient-dev \
@@ -47,3 +48,9 @@ RUN python manage.py collectstatic --noinput
 COPY ./entrypoint.sh /
 COPY ./celery-entrypoint.sh /
 RUN chmod +x /entrypoint.sh /celery-entrypoint.sh
+
+# Copy supervisord configuration
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# Set supervisord as the entrypoint
+ENTRYPOINT ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
