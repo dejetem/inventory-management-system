@@ -8,7 +8,7 @@ ARG DJANGO_SECRET_KEY
 ENV DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
 
 # Example to confirm it's accessible
-RUN echo "Secret Key is: ${DJANGO_SECRET_KEY}"
+# RUN echo "Secret Key is: ${DJANGO_SECRET_KEY}"
 
 
 # Install system dependencies
