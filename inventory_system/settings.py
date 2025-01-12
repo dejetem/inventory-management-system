@@ -23,6 +23,8 @@ load_dotenv()
 # print("os.environ.get('DB_NAME')", os.environ.get('DB_NAME'))
 
 # print("Environment variables:", os.environ)
+# for key, value in os.environ.items():
+#     print(f"{key}: {value}")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
