@@ -2,7 +2,7 @@ services:
   - type: web
     name: inventory-system
     region: oregon
-    env: docker
+    runtime: docker
     buildCommand: docker build -t inventory-system .
     startCommand: gunicorn inventory_system.wsgi:application --bind 0.0.0.0:$PORT
     envVars:
@@ -15,7 +15,7 @@ services:
 
   - type: worker
     name: celery-worker
-    env: docker
+    runtime: docker
     region: oregon
     buildCommand: docker build -t inventory-system .
     startCommand: celery -A inventory_system worker --loglevel=info --concurrency 4
