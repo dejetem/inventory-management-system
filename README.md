@@ -35,15 +35,15 @@ To run test
 To run test coverage
 #### `docker ps`
 #### `docker exec -it <container_name_or_id> coverage run manage.py test` 
-#### `docker exec -it <container_name_or_id> coverage report` 
-#### `docker exec -it <container_name_or_id> coverage html` 
+#### `docker exec -it 3ef3c4be733f coverage report` 
+#### `docker exec -it 3ef3c4be733f coverage html` 
 Open the index.html file in your web browser to view the detailed coverage report. You can do this by running:
-# On Linux/Mac
+On Linux/Mac
 ```bash
    open htmlcov/index.html
 ```
+On Windows
 ```bash
-# On Windows
    start htmlcov/index.html
 ```
 Runs the app in the development mode.\
