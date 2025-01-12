@@ -35,8 +35,8 @@ To run test
 To run test coverage
 #### `docker ps`
 #### `docker exec -it <container_name_or_id> coverage run manage.py test` 
-#### `docker exec -it 3ef3c4be733f coverage report` 
-#### `docker exec -it 3ef3c4be733f coverage html` 
+#### `docker exec -it <container_name_or_id>  coverage report` 
+#### `docker exec -it <container_name_or_id>  coverage html` 
 Open the index.html file in your web browser to view the detailed coverage report. You can do this by running:
 On Linux/Mac
 ```bash
